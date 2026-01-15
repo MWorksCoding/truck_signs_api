@@ -66,15 +66,15 @@ docker volume create truck-signs-db-data
 Start the Postgres container:
 
 ```
-docker run -d 
---name db 
---network truck-signs-net 
---restart always 
--e POSTGRES_DB=truckdb 
--e POSTGRES_USER=truckuser 
--e POSTGRES_PASSWORD=truckpassword 
--v truck-signs-db-data:/var/lib/postgresql/data 
-postgres:15
+docker run -d \
+  --name db \
+  --network truck-signs-net \
+  --restart always \
+  -e POSTGRES_DB=truckdb \
+  -e POSTGRES_USER=truckuser \
+  -e POSTGRES_PASSWORD=truckpassword \
+  -v truck-signs-db-data:/var/lib/postgresql/data \
+  postgres:15
 ```
 
 > Replace `truckdb`, `truckuser`, `truckpassword` with your `.env` values if needed.
@@ -92,13 +92,13 @@ docker build -t truck-signs-api .
 Run the backend container:
 
 ```
-docker run -d 
---name truck-signs-api 
---network truck-signs-net 
---restart always 
---env-file .env 
--p 8020:8020 
-truck-signs-api
+docker run -d \
+  --name truck-signs-api \
+  --network truck-signs-net \
+  --restart always \
+  --env-file .env \
+  -p 8020:8020 \
+  truck-signs-api
 ```
 
 > The backend will automatically:
