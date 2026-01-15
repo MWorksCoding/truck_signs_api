@@ -1,14 +1,14 @@
 import environ
 from .base import *
 
-DEBUG = True
+DEBUG = False
 
 env = environ.Env()
 # reading env file
 environ.Env.read_env()
 
 SECRET_KEY = env("DOCKER_SECRET_KEY")
-DEBUG = True
+DEBUG = False
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
