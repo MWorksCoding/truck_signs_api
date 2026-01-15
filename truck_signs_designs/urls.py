@@ -18,10 +18,10 @@ from django.urls import path
 from django.conf.urls import url,include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # url(r'^$', HomePageAPI, name='home'),
+    path('', lambda request: redirect('/truck-signs/')),  # root redirect
     url(r'^truck-signs/', include('backend.urls', namespace='trucks-signs-namespace')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

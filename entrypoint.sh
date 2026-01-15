@@ -9,9 +9,9 @@ done
 
 echo "PostgreSQL is ready"
 
-python manage.py collectstatic --noinput
 python manage.py makemigrations
 python manage.py migrate
+python manage.py collectstatic --noinput
 
 # Create superuser ONLY if it does not exist
 echo "Creating superuser if not exists..."
