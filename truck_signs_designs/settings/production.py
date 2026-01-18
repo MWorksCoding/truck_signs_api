@@ -6,8 +6,6 @@ from .base import *
 django_heroku.settings(locals())
 
 
-DEBUG = False
-
 SECRET_KEY= os.environ["SECRET_KEY"]
 
 # db_from_env = dj_database_url.config()

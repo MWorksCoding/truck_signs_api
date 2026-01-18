@@ -1,8 +1,6 @@
 import environ
 from .base import *
 
-DEBUG = True
-
 env = environ.Env()
 # reading env file
 environ.Env.read_env()
@@ -15,8 +13,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://signsfortrucks.com",
     "http://localhost:3000",
 ]
-
-
 
 DATABASES = {
     'default': {

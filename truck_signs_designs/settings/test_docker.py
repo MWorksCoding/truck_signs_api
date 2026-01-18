@@ -1,8 +1,6 @@
 import environ
 from .base import *
 
-DEBUG = False
-
 env = environ.Env()
 # reading env file
 environ.Env.read_env()

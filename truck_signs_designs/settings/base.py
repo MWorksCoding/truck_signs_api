@@ -22,10 +22,14 @@ TEMPLATES_DIR = os.path.join(ROOT_BASE_DIR,'templates')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 
+# SECURITY
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-
-ALLOWED_HOSTS = ['*']
-DEBUG = True
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ["DJANGO_ALLOWED_HOSTS"].split(",")
+    if host.strip()
+]
 
 # Application definition
 

@@ -26,20 +26,33 @@ Before you begin, ensure the following is installed:
 
 ## 🚀 Quickstart
 
-Clone the repository:
+Clone this repository and follow the setup instructions below to get the application running.
 
+Open your command line and type the following commands:
+With SSH configured (if SSH Keys are provided to GitHub)
 ```
-git clone https://github.com/MWorksCoding/truck_signs_api
+git clone git@github.com:MWorksCoding/truck_signs_api.git
+```
+Classic HTTPS (if no SSH Keys are provided to GitHub)
+```
+git clone https://github.com/MWorksCoding/truck_signs_api.git
+```
+
+Navigate to the root project directory you just cloned.
+```
 cd truck_signs_api
 ```
 
-Create a `.env` file in the root directory with all environment variables:
+> [!NOTE]
+> Inside your root directory, you need to create a `.env` file for your environment variables.  
+> You can copy and paste the content from [example.env](./example.env) by running:
+>
+> ```
+> cp example.env .env
+> ```
+>
+> Please keep in mind that the values should only be used for local development for security reasons.
 
-```
-cp example.env .env
-```
-
-> Make sure to update the `.env` values for your environment (database credentials, secret key, superuser credentials, Stripe, email, etc.)
 
 ---
 
@@ -69,7 +82,7 @@ Start the Postgres container:
 docker run -d \
   --name db \
   --network truck-signs-net \
-  --restart always \
+  --restart unless-stopped \
   -e POSTGRES_DB=truckdb \
   -e POSTGRES_USER=truckuser \
   -e POSTGRES_PASSWORD=truckpassword \
@@ -95,7 +108,7 @@ Run the backend container:
 docker run -d \
   --name truck-signs-api \
   --network truck-signs-net \
-  --restart always \
+  --restart unless-stopped \
   --env-file .env \
   -p 8020:8020 \
   truck-signs-api
@@ -125,7 +138,6 @@ Follow backend logs:
 docker logs -f truck-signs-api
 ```
 
-
 You can check our your localhost at port 8020:
 ```
 http://localhost:8020
@@ -147,7 +159,6 @@ Admin panel:
 ```
 http://<your-ip>:8020/admin
 ```
-
 
 ---
 
