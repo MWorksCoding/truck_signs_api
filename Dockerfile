@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # ===============================
-# 4. Install Python dependencies
+# 4. Copy Python dependencies
 # ===============================
 COPY requirements.txt .
 
