@@ -22,10 +22,14 @@ TEMPLATES_DIR = os.path.join(ROOT_BASE_DIR,'templates')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 
+# SECURITY
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1',]
-
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ["DJANGO_ALLOWED_HOSTS"].split(",")
+    if host.strip()
+]
 
 # Application definition
 
@@ -44,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -135,7 +140,7 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 # STATICFILES_DIRS = (os.path.join(ROOT_BASE_DIR, 'static'),)
-STATIC_ROOT = os.path.join(ROOT_BASE_DIR,'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # STATICFILES_FINDERS = (
 # 'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -143,7 +148,7 @@ STATIC_ROOT = os.path.join(ROOT_BASE_DIR,'static/')
 # )
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(ROOT_BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # STRIPE_PUBLISHABLE_KEY=os.getenv("STRIPE_PUBLISHABLE_KEY")
 # STRIPE_SECRET_KEY=os.getenv("STRIPE_SECRET_KEY")
@@ -155,3 +160,5 @@ MEDIA_ROOT = os.path.join(ROOT_BASE_DIR, 'media')
 # EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 # Activate Django-Heroku.
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

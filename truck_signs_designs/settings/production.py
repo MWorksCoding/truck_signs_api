@@ -6,8 +6,6 @@ from .base import *
 django_heroku.settings(locals())
 
 
-DEBUG = False
-
 SECRET_KEY= os.environ["SECRET_KEY"]
 
 # db_from_env = dj_database_url.config()
@@ -40,8 +38,8 @@ DATABASES = {
     }
 }
 
-STRIPE_PUBLISHABLE_KEY=os.environ["STRIPE_PUBLISHABLE_KEY"]
-STRIPE_SECRET_KEY=os.environ["STRIPE_SECRET_KEY"]
+STRIPE_PUBLISHABLE_KEY=os.environ["DOCKER_STRIPE_PUBLISHABLE_KEY"]
+STRIPE_SECRET_KEY=os.environ["DOCKER_STRIPE_SECRET_KEY"]
 
 CURRENT_ADMIN_DOMAIN = os.environ["CURRENT_ADMIN_DOMAIN"]
 
@@ -51,5 +49,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
-EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
+EMAIL_HOST_USER = os.environ["DOCKER_EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["DOCKER_EMAIL_HOST_PASSWORD"]
